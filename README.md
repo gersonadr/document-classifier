@@ -32,15 +32,15 @@ The tool currently supports PDFs or image documents. Word/ppt not supported.
 
     On Mac / Linux:
 
-    `docker run -p 5000:5000 -v $(pwd):/app gersonadr/document-classifier:0.2`
+    `docker run -p 5000:5000 -v $(pwd):/host gersonadr/document-classifier:0.2`
 
     On Windows:
 
-    `docker run -p 5000:5000 -v ${PWD}:/app gersonadr/document-classifier:0.2`
+    `docker run -p 5000:5000 -v ${PWD}:/host gersonadr/document-classifier:0.2`
 
 - (Optional) Change the port if 5000 is not available:
 
-    `docker run -p 8080:5000 -v $(pwd):/app gersonadr/document-classifier:0.2`
+    `docker run -p 8080:5000 -v $(pwd):/host gersonadr/document-classifier:0.2`
 
 ## Training
 
@@ -66,23 +66,23 @@ Before running the predictor, you'll need to train the tool using existing docum
 
 - Start the tool:
 
-`docker run -p 5000:5000 -v $(pwd):/app gersonadr/document-classifier:0.2`
+`docker run -p 5000:5000 -v $(pwd):/host gersonadr/document-classifier:0.2`
 
 - Encode your documents folder name in Base64.
 
   - Navigate to <https://www.base64encode.org/>
 
-  - Copy / Paste your documents folder name, (eg: "Documents").
+  - Copy / Paste your documents folder name, (eg: "/host/Documents").
   
   For the example above:
 
-  unencoded: `Documents`
+  unencoded: `/host/Documents`
 
-  encoded: `RG9jdW1lbnRz`
+  encoded: `L2hvc3QvRG9jdW1lbnRz`
 
 - Open the browser and invoke the "train" endpoint.
 
-    `http://localhost:5000/train/RG9jdW1lbnRz`
+    `http://localhost:5000/train/L2hvc3QvRG9jdW1lbnRz`
 
 This will take some time, say, 20 minutes for 2k documents
 
@@ -97,13 +97,13 @@ Now that the model is trained, to predict a new document you'll:
 
 - Encode the relative new document path as base 64, eg:
 
-    unencoded: `Documents/MyNewDocument.pdf`
+    unencoded: `/host/Documents/MyNewDocument.pdf`
 
-    encoded: `RG9jdW1lbnRzL015TmV3RG9jdW1lbnQucGRm`
+    encoded: `L2hvc3QvRG9jdW1lbnRzL015TmV3RG9jdW1lbnQucGRm`
 
 - Invoke the Predict endpoint:
 
-    `http://localhost:5000/predict/RG9jdW1lbnRzL015TmV3RG9jdW1lbnQucGRm`
+    `http://localhost:5000/predict/L2hvc3QvRG9jdW1lbnRzL015TmV3RG9jdW1lbnQucGRm`
 
 You should see this:
 

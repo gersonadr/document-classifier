@@ -75,8 +75,8 @@ def train(docs_folder):
             f"Document {filename} ({doc_type_original}) is classified as {doc_type_predicted} with confidence level {confidence:.2f}"
         )
 
-    joblib.dump(classifier, "classifier.joblib")
-    joblib.dump(vectorizer, "vectorizer.joblib")
+    joblib.dump(classifier, "/host/classifier.joblib")
+    joblib.dump(vectorizer, "/host/vectorizer.joblib")
     print(" - Model saved in files classifier.joblib and vectorizer.joblib")
     return result
 
