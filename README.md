@@ -1,6 +1,21 @@
 # Document classifier tool
 
-## Primary use-case is to help bookkeepers automate their workflows
+This tool is primarily designed for bookkeepers to automate their workflows, but it can also be utilized by individuals who have an extensive collection of documents and require consistent classification of new documents.
+
+## How it works?
+
+```
+curl http:\\localhost:5000\<document_path>
+
+{
+  "confidence": 0.5432229826918525,
+  "type": "Invoice"
+}
+```
+
+"Invoice" is one of the possible document types, but it can be tax forms, legal contracts or any document type based on your collection.
+
+The tool currently supports PDFs or image documents. Word/ppt not supported.
 
 ## Install
 
@@ -15,11 +30,17 @@
 
   - Download the docker image
 
-    `docker run -p 5000:5000 -v $(pwd):/app myflaskapp`
+    On Mac / Linux:
+
+    `docker run -p 5000:5000 -v $(pwd):/app gersonadr/document-classifier:0.2`
+
+    On Windows:
+
+    `docker run -p 5000:5000 -v ${PWD}:/app gersonadr/document-classifier:0.2`
 
 - (Optional) Change the port if 5000 is not available:
 
-    `docker run -p 8080:5000 -v $(pwd):/app myflaskapp`
+    `docker run -p 8080:5000 -v $(pwd):/app gersonadr/document-classifier:0.2`
 
 ## Training
 
@@ -39,13 +60,13 @@ Before running the predictor, you'll need to train the tool using existing docum
         /Users/username/Documents/Receipts
         /Users/username/Documents/Bank Statements
 
-- On Terminal, navigate to the Documents folder:
+- On Terminal, navigate to one-up Documents folder:
 
-`cd /Users/username/Documents`
+`cd /Users/username`
 
 - Start the tool:
 
-`docker run -p 5000:5000 -v $(pwd):/app myflaskapp`
+`docker run -p 5000:5000 -v $(pwd):/app gersonadr/document-classifier:0.2`
 
 - Encode your documents folder name in Base64.
 
@@ -72,9 +93,9 @@ Once done, you should see the models created on your current directory. eg:
 
 ## Running
 
-Now that the model is trained, to predict a document type you'll:
+Now that the model is trained, to predict a new document you'll:
 
-- Encode the relative file path as base 64, eg:
+- Encode the relative new document path as base 64, eg:
 
     unencoded: `Documents/MyNewDocument.pdf`
 
@@ -92,3 +113,7 @@ You should see this:
   "type": "Invoice"
 }
 ```
+
+The confidence level increases with the number of training documents.
+
+Based on experimentation, a confidence level above 80% is considered reliable while anything below 30% is irrelevant.
