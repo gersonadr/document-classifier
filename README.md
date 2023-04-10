@@ -116,4 +116,4 @@ You should see this:
 
 The confidence level increases with the number of training documents.
 
-Based on experimentation, a confidence level above 80% is considered reliable while anything below 30% is irrelevant.
+Based on experimentation, confidence levels > 80% are considered reliable while < 30% should be discarded.
