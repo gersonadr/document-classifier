@@ -32,15 +32,15 @@ The tool currently supports PDFs or image documents. Word/ppt not supported.
 
     On Mac / Linux:
 
-    `docker run -p 5000:5000 -v $(pwd):/host gersonadr/document-classifier:0.3`
+    `docker run -p 5000:5000 -v $(pwd):/host gersonadr/document-classifier:0.4`
 
     On Windows:
 
-    `docker run -p 5000:5000 -v ${PWD}:/host gersonadr/document-classifier:0.3`
+    `docker run -p 5000:5000 -v ${PWD}:/host gersonadr/document-classifier:0.4`
 
 - (Optional) Change the port if 5000 is not available:
 
-    `docker run -p 8080:5000 -v $(pwd):/host gersonadr/document-classifier:0.3`
+    `docker run -p 8080:5000 -v $(pwd):/host gersonadr/document-classifier:0.4`
 
 ## Training
 
@@ -66,7 +66,7 @@ Before running the predictor, you'll need to train the tool using existing docum
 
 - Start the tool:
 
-`docker run -p 5000:5000 -v $(pwd):/host gersonadr/document-classifier:0.3`
+`docker run -p 5000:5000 -v $(pwd):/host gersonadr/document-classifier:0.4`
 
 - Encode your documents folder name in Base64.
 
@@ -91,7 +91,7 @@ Once done, you should see the models created on your current directory. eg:
         /Users/username/classifier.joblib
         /Users/username/vectorizer.joblib
 
-## Running
+## Classify the Document
 
 Now that the model is trained, to predict a new document you'll:
 

@@ -11,8 +11,13 @@ def convert_pdf_to_png(pdf_file):
         # Iterate through the pages
         for page in pdf:
 
+            # Bumps up the resolution
+            zoom_x = 4.0
+            zoom_y = 4.0
+            mat = fitz.Matrix(zoom_x, zoom_y)
+
             # Render the page as a PNG image
-            pix = page.get_pixmap(alpha=False)
+            pix = page.get_pixmap(matrix=mat, alpha=False)
 
             # Save the image as a PNG file
             pix.save(f"{pdf_file}.png")
