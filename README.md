@@ -72,7 +72,7 @@ Before running the predictor, you'll need to train the tool using existing docum
 
   - Navigate to <https://www.base64encode.org/>
 
-  - Copy / Paste your documents folder name, (eg: "/host/Documents").
+  - Copy / Paste your documents folder name, prepended with "/host" (eg: "/host/Documents").
   
   For the example above:
 
@@ -95,7 +95,7 @@ Once done, you should see the models created on your current directory. eg:
 
 Now that the model is trained, to predict a new document you'll:
 
-- Encode the relative new document path as base 64, prepended by '/host', eg:
+- Encode the relative new document path as base 64, prepended with '/host', eg:
 
     unencoded: `/host/Documents/MyNewDocument.pdf`
 
@@ -116,4 +116,4 @@ You should see this:
 
 The confidence level increases with the number of training documents.
 
-Based on experimentation, a confidence level above 80% is considered reliable while anything below 30% is irrelevant.
+Based on experimentation, confidence levels > 80% are considered reliable while < 30% should be discarded.
