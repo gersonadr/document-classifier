@@ -45,24 +45,27 @@ def load(docs_folder, extract_images=False, document_level=True):
     png_files = file_searcher.list_files_with_extension(".png", folder_path=docs_folder)
     for png_file in tqdm(png_files):
 
-        # get type
-        type = get_type(png_file)
+        try:
+            # get type
+            type = get_type(png_file)
 
-        # get fields
-        fields = image_parser.convert_image_to_fields(docs_folder + "/" + png_file)
+            # get fields
+            fields = image_parser.convert_image_to_fields(docs_folder + "/" + png_file)
 
-        if document_level:
-            all_text = [i["text"] for i in fields]
-            all_text = " ".join(all_text)
-            field = {}
-            field["text"] = all_text
-            field["type"] = type
-            field["filename"] = png_file
-            data.append(field)
-        else:
-            for field in fields:
+            if document_level:
+                all_text = [i["text"] for i in fields]
+                all_text = " ".join(all_text)
+                field = {}
+                field["text"] = all_text
                 field["type"] = type
+                field["filename"] = png_file
                 data.append(field)
+            else:
+                for field in fields:
+                    field["type"] = type
+                    data.append(field)
+        except:
+            pass
 
     return data
 
